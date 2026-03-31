@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bhavesh Pandole | Portfolio 2026</title>
+<link rel="icon" type="image/png" href="mann.png">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0f;
+    --paper: #f5f0e8;
+    --accent: #ff4d1c;
+    --gold: #f5c842;
+    --blue: #1a3fff;
+    --green: #00e57b;
+    --purple: #9b5de5;
+    --glow: rgba(255,77,28,0.4);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'Space Grotesk', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    width: 12px; height: 12px;
+    background: var(--accent);
+    border-radius: 50%;
+    position: fixed; top:0; left:0;
+    pointer-events: none; z-index: 9999;
+    transform: translate(-50%,-50%);
+    transition: transform 0.1s, background 0.2s;
+    mix-blend-mode: difference;
+  }
+  .cursor-trail {
+    width: 40px; height: 40px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    position: fixed; top:0; left:0;
+    pointer-events: none; z-index: 9998;
+    transform: translate(-50%,-50%);
+    transition: all 0.15s ease;
+    opacity: 0.5;
+  }
+
+  /* NOISE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9990; opacity: 0.3;
+  }
+
+  /* ============ HERO ============ */
+  #hero {
+    height: 100vh; position: relative;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 50%, #1a0a2e 0%, var(--ink) 70%);
+  }
+
+  /* Floating grid lines */
+  .grid-lines {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,77,28,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,77,28,0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridMove 20s linear infinite;
+  }
+  @keyframes gridMove {
+    0% { transform: perspective(500px) rotateX(15deg) translateY(0); }
+    100% { transform: perspective(500px) rotateX(15deg) translateY(60px); }
+  }
+
+  /* CHARACTER SVG */
+
+  /* Hero text */
+  .hero-content {
+    position: relative; z-index: 10;
+    text-align: left; padding: 0 8%;
+    width: 100%; max-width: 700px;
+  }
+
+  .hero-tag {
+    font-family: 'Caveat', cursive;
+    color: var(--accent); font-size: 1.3rem;
+    letter-spacing: 2px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero-name {
+    font-family: 'Bebas Neue', cursive;
+    font-size: clamp(4rem, 10vw, 9rem);
+    line-height: 0.9;
+    color: var(--paper);
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+  .hero-name span { color: var(--accent); }
+
+  .hero-role {
+    font-size: 1.1rem; font-weight: 300;
+    color: rgba(245,240,232,0.6);
+    letter-spacing: 4px; text-transform: uppercase;
+    margin-top: 1rem;
+    animation: fadeUp 0.8s 0.4s ease both;
+  }
+
+  .hero-desc {
+    margin-top: 1.5rem;
+    font-size: 1rem; line-height: 1.7;
+    color: rgba(245,240,232,0.7);
+    max-width: 440px;
+    animation: fadeUp 0.8s 0.6s ease both;
+  }
+
+  .hero-btns {
+    display: flex; gap: 1rem; margin-top: 2rem;
+    animation: fadeUp 0.8s 0.8s ease both;
+  }
+
+  .btn {
+    padding: 0.75rem 2rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600; font-size: 0.9rem;
+    letter-spacing: 1px; text-transform: uppercase;
+    cursor: pointer; text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+  }
+  .btn-primary {
+    background: var(--accent); color: var(--ink);
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  }
+  .btn-primary:hover {
+    background: var(--gold); transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(255,77,28,0.4);
+  }
+  .btn-outline {
+    border: 1px solid rgba(245,240,232,0.3);
+    color: var(--paper); background: transparent;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  }
+  .btn-outline:hover {
+    border-color: var(--accent); color: var(--accent);
+    transform: translateY(-3px);
+  }
+
+  .scroll-hint {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    text-align: center; animation: fadeUp 1s 1.5s ease both;
+    color: rgba(245,240,232,0.4); font-size: 0.75rem; letter-spacing: 3px;
+  }
+  .scroll-line {
+    width: 1px; height: 50px; background: linear-gradient(var(--accent), transparent);
+    margin: 0.5rem auto 0;
+    animation: scrollPulse 1.5s ease infinite;
+  }
+  @keyframes scrollPulse {
+    0% { opacity: 1; transform: scaleY(1); }
+    100% { opacity: 0; transform: scaleY(0); transform-origin: top; }
+  }
+
+  /* Orbiting dots */
+  .orbit {
+    position: absolute; left: 50%; top: 50%;
+    width: 600px; height: 600px;
+    margin: -300px 0 0 -300px;
+    animation: orbitSpin 15s linear infinite;
+    opacity: 0.15;
+  }
+  .orbit-dot {
+    position: absolute; width: 6px; height: 6px;
+    background: var(--accent); border-radius: 50%;
+  }
+  @keyframes orbitSpin { 100% { transform: rotate(360deg); } }
+
+  @keyframes fadeUp {
+    from { opacity:0; transform: translateY(30px); }
+    to { opacity:1; transform: translateY(0); }
+  }
+
+  /* ============ STORY SECTIONS ============ */
+  .section {
+    min-height: 100vh; position: relative;
+    padding: 6rem 8%;
+    display: flex; align-items: center;
+  }
+
+  .chapter-label {
+    position: absolute; top: 3rem; left: 8%;
+    font-family: 'Caveat', cursive;
+    color: var(--accent); font-size: 1.1rem;
+    opacity: 0.7;
+  }
+
+  .section-num {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 10rem; opacity: 0.04;
+    position: absolute; right: 5%; bottom: 2rem;
+    line-height: 1; color: var(--paper);
+    user-select: none;
+  }
+
+  /* ============ ABOUT SECTION ============ */
+  #about { background: linear-gradient(135deg, #0a0a0f 0%, #0e0a1a 100%); }
+
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; width: 100%; align-items: center;
+    max-width: 1200px; margin: 0 auto;
+  }
+
+  .about-visual {
+    position: relative; display: flex;
+    justify-content: center; align-items: center;
+  }
+
+  .avatar-ring {
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, var(--accent), var(--purple), var(--blue), var(--green), var(--accent));
+    animation: ringRotate 4s linear infinite;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .avatar-ring::before {
+    content: '';
+    position: absolute; inset: 4px;
+    border-radius: 50%; background: #0e0a1a;
+  }
+  @keyframes ringRotate { 100% { transform: rotate(360deg); } }
+
+  .avatar-inner {
+    position: absolute; inset: 12px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1a0a2e, #0a1a2e);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 5rem; color: var(--paper);
+    z-index: 2;
+  }
+
+  .floating-badges {
+    position: absolute; width: 100%; height: 100%;
+    top: 0; left: 0;
+  }
+  .badge {
+    position: absolute;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.75rem; font-weight: 600;
+    color: var(--paper); white-space: nowrap;
+    animation: badgeFloat 3s ease-in-out infinite;
+  }
+  .badge:nth-child(1) { top: 0%; left: 65%; animation-delay: 0s; }
+  .badge:nth-child(2) { top: 30%; left: 85%; animation-delay: 0.5s; }
+  .badge:nth-child(3) { bottom: 20%; left: 70%; animation-delay: 1s; }
+  .badge:nth-child(4) { top: 10%; left: -15%; animation-delay: 1.5s; }
+  .badge:nth-child(5) { bottom: 30%; left: -20%; animation-delay: 2s; }
+  @keyframes badgeFloat {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .about-text h2 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 1; margin-bottom: 1.5rem;
+  }
+  .about-text h2 em { color: var(--accent); font-style: normal; }
+
+  .story-text {
+    color: rgba(245,240,232,0.7);
+    line-height: 1.9; font-size: 1rem;
+    position: relative; padding-left: 1.5rem;
+    border-left: 2px solid rgba(255,77,28,0.3);
+    margin-bottom: 1rem;
+  }
+
+  /* ============ SKILLS ============ */
+  #skills { background: var(--ink); }
+  #skills .inner { max-width: 1200px; margin: 0 auto; width: 100%; }
+
+  .skills-title {
+    font-family: 'Bebas Neue', cursive;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    margin-bottom: 3rem; text-align: center;
+  }
+  .skills-title span { color: var(--accent); }
+
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;
+  }
+
+  .skill-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    padding: 2rem; border-radius: 4px;
+    position: relative; overflow: hidden;
+    transition: all 0.4s ease;
+    cursor: default;
+  }
+  .skill-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--purple));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  .skill-card:hover { background: rgba(255,77,28,0.05); border-color: rgba(255,77,28,0.2); transform: translateY(-4px); }
+  .skill-card:hover::before { transform: scaleX(1); }
+
+  .skill-icon { font-size: 2.5rem; margin-bottom: 1rem; display: block; }
+  .skill-name {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.6rem; color: var(--paper); margin-bottom: 0.5rem;
+  }
+  .skill-desc { color: rgba(245,240,232,0.55); font-size: 0.9rem; line-height: 1.6; }
+
+  .skill-bar-wrap { margin-top: 1rem; }
+  .skill-bar-bg { background: rgba(255,255,255,0.08); height: 3px; border-radius: 2px; overflow: hidden; }
+  .skill-bar {
+    height: 100%; border-radius: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--purple));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 1.2s cubic-bezier(0.4,0,0.2,1);
+  }
+  .skill-bar.animated { transform: scaleX(1); }
+
+  /* ============ TIMELINE / CERTS ============ */
+  #certs { background: linear-gradient(180deg, #0a0a0f, #070710); }
+  #certs .inner { max-width: 900px; margin: 0 auto; width: 100%; }
+
+  .certs-title {
+    font-family: 'Bebas Neue', cursive;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    text-align: center; margin-bottom: 3rem;
+  }
+  .certs-title span { color: var(--gold); }
+
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(var(--accent), transparent);
+  }
+
+  .tl-item {
+    position: relative;
+    margin-bottom: 2.5rem;
+    padding-left: 2rem;
+    opacity: 0; transform: translateX(-20px);
+    transition: all 0.6s ease;
+  }
+  .tl-item.visible { opacity: 1; transform: translateX(0); }
+  .tl-item::before {
+    content: '';
+    position: absolute; left: -2.42rem; top: 0.4rem;
+    width: 10px; height: 10px;
+    background: var(--accent); border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(255,77,28,0.2);
+  }
+
+  .tl-org {
+    font-family: 'Caveat', cursive;
+    color: var(--accent); font-size: 0.85rem; letter-spacing: 2px;
+    text-transform: uppercase; margin-bottom: 0.25rem;
+  }
+  .tl-title {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.5rem; color: var(--paper);
+    margin-bottom: 0.25rem;
+  }
+  .tl-desc { color: rgba(245,240,232,0.5); font-size: 0.875rem; }
+
+  /* ============ CONTACT ============ */
+  #contact {
+    background: var(--ink);
+    text-align: center;
+    justify-content: center; flex-direction: column;
+  }
+
+  .contact-big {
+    font-family: 'Bebas Neue', cursive;
+    font-size: clamp(3rem, 8vw, 7rem);
+    line-height: 0.9; margin-bottom: 1.5rem;
+    position: relative; z-index: 1;
+  }
+  .contact-big span { color: var(--accent); }
+
+  .contact-sub {
+    color: rgba(245,240,232,0.5);
+    max-width: 500px; margin: 0 auto 2.5rem;
+    font-size: 1rem; line-height: 1.7;
+  }
+
+  .contact-links {
+    display: flex; gap: 1rem;
+    justify-content: center; flex-wrap: wrap;
+  }
+
+  .contact-pill {
+    padding: 0.75rem 1.75rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 100px; color: var(--paper);
+    text-decoration: none; font-weight: 600;
+    font-size: 0.9rem; letter-spacing: 0.5px;
+    transition: all 0.3s;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .contact-pill:hover {
+    background: var(--accent); border-color: var(--accent);
+    color: var(--ink); transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(255,77,28,0.3);
+  }
+
+  /* ============ NAV ============ */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 1000; padding: 1.2rem 8%;
+    display: flex; justify-content: space-between; align-items: center;
+    transition: background 0.3s;
+  }
+  nav.scrolled {
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.5rem; color: var(--paper);
+    letter-spacing: 2px;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: rgba(245,240,232,0.6); text-decoration: none;
+    font-size: 0.85rem; font-weight: 500; letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute; bottom: -4px; left: 0; right: 0;
+    height: 1px; background: var(--accent);
+    transform: scaleX(0); transition: transform 0.3s;
+  }
+  .nav-links a:hover { color: var(--paper); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+
+  /* ============ PARTICLES ============ */
+  #particles {
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 0;
+    overflow: hidden;
+  }
+  .particle {
+    position: absolute;
+    width: 2px; height: 2px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: particleDrift linear infinite;
+    opacity: 0;
+  }
+  @keyframes particleDrift {
+    0% { transform: translateY(100vh) scale(0); opacity: 0; }
+    10% { opacity: 0.5; }
+    90% { opacity: 0.3; }
+    100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+  }
+
+  /* ============ MARQUEE ============ */
+  .marquee-wrap {
+    overflow: hidden; padding: 1rem 0;
+    background: var(--accent);
+    border-top: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .marquee {
+    display: flex; gap: 3rem;
+    animation: marqueeScroll 20s linear infinite;
+    white-space: nowrap;
+  }
+  .marquee-item {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.2rem; color: var(--ink);
+    letter-spacing: 3px; flex-shrink: 0;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .marquee-item::before { content: '✦'; }
+  @keyframes marqueeScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 768px) {
+    .about-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .character-container { display: none; }
+    nav { padding: 1rem 5%; }
+    .nav-links { display: none; }
+    .section { padding: 5rem 5%; }
+    .hero-content { padding: 0 5%; }
+  }
+
+  /* Reveal animations */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* Glitch effect on hover */
+  .glitch { position: relative; display: inline-block; }
+  .glitch:hover::before, .glitch:hover::after {
+    content: attr(data-text);
+    position: absolute; top: 0; left: 0;
+    font-family: inherit; font-size: inherit; font-weight: inherit;
+    color: var(--paper);
+  }
+  .glitch:hover::before {
+    color: var(--accent); clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+    transform: translate(-2px, -2px); animation: glitch1 0.3s infinite;
+  }
+  .glitch:hover::after {
+    color: var(--blue); clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+    transform: translate(2px, 2px); animation: glitch2 0.3s infinite;
+  }
+  @keyframes glitch1 {
+    0% { transform: translate(-2px, -2px); }
+    50% { transform: translate(2px, 0); }
+    100% { transform: translate(-2px, 2px); }
+  }
+  @keyframes glitch2 {
+    0% { transform: translate(2px, 2px); }
+    50% { transform: translate(-2px, 0); }
+    100% { transform: translate(2px, -2px); }
+  }
+
+  footer {
+    text-align: center; padding: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    color: rgba(245,240,232,0.3);
+    font-size: 0.8rem; letter-spacing: 2px;
+  }
+</style>
+</head>
+<body>
+
+<!-- Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-trail" id="cursorTrail"></div>
+
+<!-- Particles bg -->
+<div id="particles"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo"><span>B</span>havesh Pandole</div>
+  <ul class="nav-links">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#certs">Certs</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ======= HERO ======= -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="grid-lines"></div>
+
+  <!-- Orbiting decoration -->
+  <div class="orbit" style="top:40%;left:45%;">
+    <div class="orbit-dot" style="top:0;left:50%;"></div>
+    <div class="orbit-dot" style="top:50%;right:0;"></div>
+    <div class="orbit-dot" style="bottom:0;left:50%;"></div>
+    <div class="orbit-dot" style="top:50%;left:0;"></div>
+  </div>
+
+  <div class="hero-content">
+    <p class="hero-tag">✦ Portfolio 2026</p>
+    <h1 class="hero-name glitch" data-text="BHAVESH PANDOLE">
+      <span>BHA</span>VESH<br>PAN<span>DOLE</span>
+    </h1>
+    <p class="hero-role">Developer &nbsp;·&nbsp; Designer &nbsp;·&nbsp; Artist</p>
+    <p class="hero-desc">
+      Computer Science graduate crafting digital experiences through code, design, and creativity. 
+      I blend logic with art — one pixel at a time.
+    </p>
+    <div class="hero-btns">
+      <a href="#about" class="btn btn-primary">Explore Story</a>
+      <a href="updated.pdf" target="_blank" class="btn btn-outline">Download CV</a>
+    </div>
+  </div>
+
+  <!-- Animated character -->
+  <div class="character-container">
+    <svg class="character-svg" viewBox="0 0 300 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Glow circle behind -->
+      <circle cx="150" cy="220" r="130" fill="url(#glowGrad)" opacity="0.3"/>
+
+      <!-- Body base -->
+      <ellipse cx="150" cy="290" rx="60" ry="80" fill="url(#bodyGrad)"/>
+
+      <!-- Jacket -->
+      <path d="M90 260 Q95 200 150 195 Q205 200 210 260 L210 340 Q180 355 150 355 Q120 355 90 340 Z" fill="#1a1a2e"/>
+      <!-- Jacket collar -->
+      <path d="M130 195 L150 230 L170 195" fill="#ff4d1c" opacity="0.8"/>
+      <!-- Jacket lines -->
+      <line x1="150" y1="225" x2="150" y2="340" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+      <!-- Pocket -->
+      <rect x="160" y="270" width="30" height="20" rx="3" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+
+      <!-- Neck -->
+      <rect x="135" y="185" width="30" height="25" rx="10" fill="#d4a574"/>
+
+      <!-- Head -->
+      <ellipse cx="150" cy="165" rx="52" ry="58" fill="url(#headGrad)"/>
+
+      <!-- Hair -->
+      <ellipse cx="150" cy="118" rx="52" ry="22" fill="#1a0a05"/>
+      <path d="M98 130 Q85 140 90 160 Q95 155 100 160 Q105 145 110 140 Z" fill="#1a0a05"/>
+      <path d="M202 130 Q215 140 210 160 Q205 155 200 160 Q195 145 190 140 Z" fill="#1a0a05"/>
+
+      <!-- Face features -->
+      <!-- Eyes -->
+      <ellipse cx="130" cy="162" rx="10" ry="11" fill="white"/>
+      <ellipse cx="170" cy="162" rx="10" ry="11" fill="white"/>
+      <!-- Iris -->
+      <ellipse cx="131" cy="164" rx="6" ry="7" fill="#3a1a00"/>
+      <ellipse cx="171" cy="164" rx="6" ry="7" fill="#3a1a00"/>
+      <!-- Pupils -->
+      <circle cx="132" cy="165" r="3" fill="#0a0a0f"/>
+      <circle cx="172" cy="165" r="3" fill="#0a0a0f"/>
+      <!-- Eye shine -->
+      <circle cx="134" cy="162" r="1.5" fill="white"/>
+      <circle cx="174" cy="162" r="1.5" fill="white"/>
+
+      <!-- Eyebrows -->
+      <path d="M118 148 Q130 143 142 147" stroke="#1a0a05" stroke-width="3" stroke-linecap="round"/>
+      <path d="M158 147 Q170 143 182 148" stroke="#1a0a05" stroke-width="3" stroke-linecap="round"/>
+
+      <!-- Nose -->
+      <path d="M147 172 Q150 182 153 172" stroke="#b08050" stroke-width="2" stroke-linecap="round" fill="none"/>
+
+      <!-- Smile -->
+      <path d="M135 186 Q150 197 165 186" stroke="#8b4513" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+      <!-- Ears -->
+      <ellipse cx="98" cy="165" rx="8" ry="12" fill="#d4a574"/>
+      <ellipse cx="202" cy="165" rx="8" ry="12" fill="#d4a574"/>
+
+      <!-- Left arm - holding laptop -->
+      <path d="M90 240 Q60 260 55 290 Q60 300 70 295 Q80 285 95 270" fill="url(#armGrad)" stroke="#c49060" stroke-width="1"/>
+      <!-- Hand left -->
+      <ellipse cx="62" cy="296" rx="14" ry="11" fill="#d4a574"/>
+
+      <!-- Right arm raised with code -->
+      <path d="M210 240 Q240 230 255 215 Q250 200 240 205 Q225 215 210 225" fill="url(#armGrad)" stroke="#c49060" stroke-width="1"/>
+      <!-- Hand right -->
+      <ellipse cx="252" cy="210" rx="14" ry="11" fill="#d4a574"/>
+
+      <!-- Laptop -->
+      <rect x="30" y="265" width="65" height="45" rx="4" fill="#1a1a2e" stroke="#ff4d1c" stroke-width="1.5"/>
+      <rect x="24" y="308" width="77" height="6" rx="3" fill="#0a0a0f" stroke="#ff4d1c" stroke-width="1"/>
+      <!-- Screen content -->
+      <rect x="34" y="268" width="57" height="38" rx="2" fill="#0a0f1a"/>
+      <text x="37" y="279" font-family="monospace" font-size="5" fill="#00e57b">&gt; hello();</text>
+      <text x="37" y="288" font-family="monospace" font-size="4.5" fill="#ff4d1c">const me=</text>
+      <text x="37" y="296" font-family="monospace" font-size="4.5" fill="#9b5de5">"developer"</text>
+      <text x="37" y="304" font-family="monospace" font-size="4" fill="rgba(255,255,255,0.4)">// creative</text>
+
+      <!-- Code bubble from right hand -->
+      <rect x="220" y="175" width="75" height="35" rx="8" fill="#0a0f1a" stroke="#1a3fff" stroke-width="1.5"/>
+      <path d="M232 210 L228 218 L238 210" fill="#0a0f1a" stroke="#1a3fff" stroke-width="1"/>
+      <text x="224" y="190" font-family="monospace" font-size="5" fill="#00e57b">fn create()</text>
+      <text x="224" y="200" font-family="monospace" font-size="5" fill="#f5c842">  → magic</text>
+
+      <!-- Floating elements around character -->
+      <circle cx="240" cy="130" r="6" fill="#ff4d1c" opacity="0.8">
+        <animate attributeName="cy" values="130;120;130" dur="2s" repeatCount="indefinite"/>
+      </circle>
+      <rect x="72" y="200" width="10" height="10" rx="2" fill="#9b5de5" opacity="0.7" transform="rotate(15 77 205)">
+        <animate attributeName="transform" values="rotate(15 77 205);rotate(45 77 205);rotate(15 77 205)" dur="3s" repeatCount="indefinite"/>
+      </rect>
+      <polygon points="268,250 275,265 261,265" fill="#f5c842" opacity="0.7">
+        <animate attributeName="opacity" values="0.7;0.3;0.7" dur="1.5s" repeatCount="indefinite"/>
+      </polygon>
+
+      <!-- Legs -->
+      <rect x="118" y="340" width="28" height="50" rx="8" fill="#0a0a1a"/>
+      <rect x="154" y="340" width="28" height="50" rx="8" fill="#0a0a1a"/>
+      <!-- Shoes -->
+      <ellipse cx="132" cy="392" rx="20" ry="10" fill="#ff4d1c"/>
+      <ellipse cx="168" cy="392" rx="20" ry="10" fill="#ff4d1c"/>
+
+      <defs>
+        <radialGradient id="glowGrad" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#9b5de5"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+        <linearGradient id="bodyGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#d4a574"/>
+          <stop offset="100%" stop-color="#b08050"/>
+        </linearGradient>
+        <linearGradient id="headGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#e0b585"/>
+          <stop offset="100%" stop-color="#c49060"/>
+        </linearGradient>
+        <linearGradient id="armGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#c49060"/>
+          <stop offset="100%" stop-color="#d4a574"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+
+  <div class="scroll-hint">
+    SCROLL DOWN
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- Marquee -->
+<div class="marquee-wrap">
+  <div class="marquee">
+    <span class="marquee-item">Web Developer</span>
+    <span class="marquee-item">Graphic Designer</span>
+    <span class="marquee-item">3D Artist</span>
+    <span class="marquee-item">Data Analyst</span>
+    <span class="marquee-item">Blender Creator</span>
+    <span class="marquee-item">Python Dev</span>
+    <span class="marquee-item">Freelancer</span>
+    <span class="marquee-item">Problem Solver</span>
+    <!-- duplicate for seamless loop -->
+    <span class="marquee-item">Web Developer</span>
+    <span class="marquee-item">Graphic Designer</span>
+    <span class="marquee-item">3D Artist</span>
+    <span class="marquee-item">Data Analyst</span>
+    <span class="marquee-item">Blender Creator</span>
+    <span class="marquee-item">Python Dev</span>
+    <span class="marquee-item">Freelancer</span>
+    <span class="marquee-item">Problem Solver</span>
+  </div>
+</div>
+
+<!-- ======= ABOUT ======= -->
+<section id="about" class="section">
+  <span class="chapter-label">Chapter 01 — The Origin</span>
+  <span class="section-num">01</span>
+
+  <div class="about-grid">
+    <div class="about-visual reveal">
+      <div class="avatar-ring">
+        <div class="avatar-inner">BHAVESH</div>
+      </div>
+      <div class="floating-badges">
+        <span class="badge">✨ Creatives</span>
+        <span class="badge">🐍 Python</span>
+        <span class="badge">🎨 Blender</span>
+        <span class="badge">👨🏻‍💻 Web Development</span>
+        <span class="badge">⚡ Django</span>
+        <span class="badge">📊 Power BI</span>
+      </div>
+    </div>
+
+    <div class="about-text reveal" style="transition-delay:0.2s">
+      <h2>BUILDING SOLUTION WITH<br><em>BHAVESH</em></h2>
+      <p class="story-text">
+        A fresh graduate from the Institute of Computer Science and Technology, 
+        with a strong foundation in programming and software development.
+      </p>
+      <p class="story-text" style="margin-top:1rem">
+        Proficient in Python, experienced with Django framework, HTML/CSS, and OOP principles. 
+        I turn complex problems into elegant solutions.
+      </p>
+      <p class="story-text" style="margin-top:1rem">
+        Beyond code — I breathe life into visuals with Blender 3D, design dashboards 
+        in Power BI, and create graphics that communicate stories.
+      </p>
+      <div style="margin-top:2rem;">
+        <a href="updated.pdf" target="_blank" class="btn btn-primary">Download Resume</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= SKILLS ======= -->
+<section id="skills" class="section" style="flex-direction:column">
+  <span class="chapter-label">Chapter 02 — The Arsenal</span>
+  <span class="section-num">02</span>
+  <div class="inner">
+    <h2 class="skills-title reveal">MY <span>SUPER</span>POWERS</h2>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <span class="skill-icon">🌐</span>
+        <div class="skill-name">Web Development</div>
+        <div class="skill-desc">Strong foundation in C, HTML/CSS, Python and Django framework. Building responsive, functional web experiences.</div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-bg"><div class="skill-bar" data-width="0.82"></div></div>
+        </div>
+      </div>
+      <div class="skill-card reveal" style="transition-delay:0.1s">
+        <span class="skill-icon">📊</span>
+        <div class="skill-name">Data Analysis</div>
+        <div class="skill-desc">Created interactive dashboards to track and analyze online sales data using Microsoft Power BI.</div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-bg"><div class="skill-bar" data-width="0.75"></div></div>
+        </div>
+      </div>
+      <div class="skill-card reveal" style="transition-delay:0.2s">
+        <span class="skill-icon">🎨</span>
+        <div class="skill-name">Graphic Design & 3D</div>
+        <div class="skill-desc">Proficient in Blender for 3D modeling, animation, commercial graphics, and high-quality rendering.</div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-bg"><div class="skill-bar" data-width="0.88"></div></div>
+        </div>
+      </div>
+      <div class="skill-card reveal" style="transition-delay:0.3s">
+        <span class="skill-icon">🚀</span>
+        <div class="skill-name">Freelancing</div>
+        <div class="skill-desc">Delivered quality projects in Graphic Design and Web Development for clients across various industries.</div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-bg"><div class="skill-bar" data-width="0.7"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= CERTS ======= -->
+<section id="certs" class="section" style="flex-direction:column">
+  <span class="chapter-label">Chapter 03 — The Achievements</span>
+  <span class="section-num">03</span>
+  <div class="inner">
+    <h2 class="certs-title reveal">EARNED <span>BADGES</span></h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-org">Drishya Production</div>
+        <div class="tl-title">🎬 Internship Certificate</div>
+        <div class="tl-desc">Real-world industry experience in a production environment</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-org">Great Learning</div>
+        <div class="tl-title">📊 Power BI Certificate</div>
+        <div class="tl-desc">Data visualization and business intelligence mastery</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-org">Infosys</div>
+        <div class="tl-title">🌟 Personality Development</div>
+        <div class="tl-desc">Essential Training — Infosys Springboard program</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-org">Internship Studio</div>
+        <div class="tl-title">🏆 CIT Certificate</div>
+        <div class="tl-desc">Certified through structured internship and training program</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-org">Udemy</div>
+        <div class="tl-title">☁️ Salesforce Platform Developer 1</div>
+        <div class="tl-desc">Salesforce PD1 — cloud platform development certification</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-org">Micro1</div>
+        <div class="tl-title">🐍 Python Developer Certificate</div>
+        <div class="tl-desc">Verified Python development skills through Micro1 platform</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-org">Infosys</div>
+        <div class="tl-title">🗄️ Database & SQL</div>
+        <div class="tl-desc">Structured query language and database management fundamentals</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-org">Microsoft</div>
+        <div class="tl-title">🤖 AI Solution in Azure Certificate</div>
+        <div class="tl-desc">Develop AI solutions in Azure</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-org">Infosys</div>
+        <div class="tl-title">📗 Microsoft Excel Training</div>
+        <div class="tl-desc">Excel basics through Infosys Springboard e-learning program</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= CONTACT ======= -->
+<section id="contact" class="section" style="flex-direction:column; align-items:center;">
+  <span class="section-num">04</span>
+  <h2 class="contact-big reveal">LET'S<br>BUILD<br><span>TOGETHER</span></h2>
+  <p class="contact-sub reveal" style="transition-delay:0.2s">
+    Whether it's a web project, 3D art, or data dashboards — I'm always open to exciting opportunities and collaborations.
+  </p>
+  <div class="contact-links reveal" style="transition-delay:0.4s">
+    <a href="aboutt.html" class="contact-pill">
+      ✉️ Hire Me
+    </a>
+    <a href="https://www.instagram.com/thebhaveshpandole" target="_blank" class="contact-pill">
+      📸 Instagram
+    </a>
+    <a href="portfolioo.html" class="contact-pill">
+      🗂️ Projects
+    </a>
+    <a href="galleryy.html" class="contact-pill">
+      🎨 Gallery
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p>MADE WITH ❤️ &nbsp;·&nbsp; BHAVESH PANDOLE &nbsp;·&nbsp; 2026</p>
+</footer>
+
+<script>
+// ======= CURSOR =======
+const cursor = document.getElementById('cursor');
+const trail = document.getElementById('cursorTrail');
+let mx=0, my=0, tx=0, ty=0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx + 'px';
+  cursor.style.top = my + 'px';
+});
+function animTrail() {
+  tx += (mx - tx) * 0.12;
+  ty += (my - ty) * 0.12;
+  trail.style.left = tx + 'px';
+  trail.style.top = ty + 'px';
+  requestAnimationFrame(animTrail);
+}
+animTrail();
+
+document.querySelectorAll('a, button').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.transform = 'translate(-50%,-50%) scale(2)';
+    trail.style.transform = 'translate(-50%,-50%) scale(1.5)';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+    trail.style.transform = 'translate(-50%,-50%) scale(1)';
+  });
+});
+
+// ======= NAV =======
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// ======= PARTICLES =======
+const particleContainer = document.getElementById('particles');
+for (let i = 0; i < 30; i++) {
+  const p = document.createElement('div');
+  p.classList.add('particle');
+  p.style.left = Math.random() * 100 + 'vw';
+  p.style.animationDuration = (Math.random() * 15 + 10) + 's';
+  p.style.animationDelay = (Math.random() * 10) + 's';
+  p.style.width = p.style.height = (Math.random() * 3 + 1) + 'px';
+  particleContainer.appendChild(p);
+}
+
+// ======= SCROLL REVEAL =======
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      // Animate skill bars
+      const bar = entry.target.querySelector('.skill-bar');
+      if (bar) {
+        setTimeout(() => {
+          bar.style.transform = `scaleX(${bar.dataset.width})`;
+          bar.classList.add('animated');
+        }, 300);
+      }
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Timeline reveal
+const tlObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 100);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.tl-item').forEach((el, i) => {
+  el.style.transitionDelay = (i * 0.08) + 's';
+  tlObserver.observe(el);
+});
+
+// ======= PARALLAX HERO =======
+window.addEventListener('scroll', () => {
+  const hero = document.getElementById('hero');
+  const s = window.scrollY;
+  if (s < window.innerHeight) {
+    hero.style.transform = `translateY(${s * 0.3}px)`;
+    hero.style.opacity = 1 - s / (window.innerHeight * 0.8);
+  }
+});
+</script>
+</body>
+</html>
